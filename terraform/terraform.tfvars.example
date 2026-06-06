@@ -1,0 +1,7 @@
+aws_region          = "us-east-1"
+cluster_name        = "project-bedrock-cluster"
+vpc_name            = "project-bedrock-vpc"
+environment         = "production"
+student_id          = "alt-soe-025-4486"
+catalog_db_password = "CHANGE_ME"
+orders_db_password  = "CHANGE_ME"

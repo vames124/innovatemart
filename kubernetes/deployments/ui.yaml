@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui
+  namespace: retail-app
+  labels:
+    app: ui
+    app.kubernetes.io/component: ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+      - name: ui
+        image: public.ecr.aws/aws-containers/retail-store-sample-ui:0.8.5
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENDPOINTS_CATALOG
+          value: "http://catalog.retail-app.svc:8080"
+        - name: ENDPOINTS_CARTS
+          value: "http://cart.retail-app.svc:8080"
+        - name: ENDPOINTS_ORDERS
+          value: "http://orders.retail-app.svc:8080"
+        - name: ENDPOINTS_CHECKOUT
+          value: "http://checkout.retail-app.svc:8080"
+        resources:
+          requests:
+            cpu: 128m
+            memory: 256Mi
+          limits:
+            cpu: 256m
+            memory: 512Mi

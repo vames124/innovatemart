@@ -1,0 +1,8 @@
+clusterName: project-bedrock-cluster
+region: us-east-1
+vpcId: REPLACE_WITH_VPC_ID
+serviceAccount:
+  create: true
+  name: aws-load-balancer-controller
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::306980977523:role/bedrock-aws-lb-controller-role"

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+  namespace: retail-app
+  labels:
+    app: cart
+    app.kubernetes.io/component: cart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cart
+  template:
+    metadata:
+      labels:
+        app: cart
+    spec:
+      serviceAccountName: cart-sa
+      containers:
+      - name: cart
+        image: public.ecr.aws/aws-containers/retail-store-sample-cart:0.8.5
+        ports:
+        - containerPort: 8080
+        env:
+        - name: CARTS_DYNAMODB_TABLENAME
+          value: "retail-store-cart"
+        - name: CARTS_DYNAMODB_CREATETABLE
+          value: "true"
+        - name: AWS_DEFAULT_REGION
+          value: "us-east-1"
+        resources:
+          requests:
+            cpu: 128m
+            memory: 256Mi
+          limits:
+            cpu: 256m
+            memory: 512Mi

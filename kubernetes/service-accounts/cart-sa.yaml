@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cart-sa
+  namespace: retail-app
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::306980977523:role/bedrock-cart-dynamodb-role"
+  labels:
+    app.kubernetes.io/component: cart
